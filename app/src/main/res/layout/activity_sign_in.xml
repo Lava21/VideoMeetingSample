@@ -144,5 +144,18 @@
             android:textSize="@dimen/_13ssp"
             app:layout_constraintTop_toBottomOf="@id/btnSignIn"/>
 
+        <TextView
+            android:id="@+id/tvSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:gravity="center"
+            android:padding="@dimen/_6sdp"
+            android:text="@string/sign_up"
+            android:textAllCaps="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvNoAccount"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
