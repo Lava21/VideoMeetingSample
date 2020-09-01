@@ -1,10 +1,12 @@
-package com.mas.samplevideomeeting;
+package com.mas.samplevideomeeting.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.mas.samplevideomeeting.R;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -13,11 +15,8 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        findViewById(R.id.tvSignUp).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), SignUpActivity.class));
-            }
-        });
+        findViewById(R.id.tvSignUp).setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), SignUpActivity.class)));
+
+
     }
 }

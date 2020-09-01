@@ -1,8 +1,10 @@
-package com.mas.samplevideomeeting;
+package com.mas.samplevideomeeting.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.mas.samplevideomeeting.R;
 
 public class MainActivity extends AppCompatActivity {
 

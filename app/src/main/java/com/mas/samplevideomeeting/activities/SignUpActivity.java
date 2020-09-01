@@ -1,9 +1,11 @@
-package com.mas.samplevideomeeting;
+package com.mas.samplevideomeeting.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+
+import com.mas.samplevideomeeting.R;
 
 public class SignUpActivity extends AppCompatActivity {
 

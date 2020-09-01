@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "118231109169",
+    "firebase_url": "https://video-meeting-d17be.firebaseio.com",
+    "project_id": "video-meeting-d17be",
+    "storage_bucket": "video-meeting-d17be.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:118231109169:android:7f6eaf52f935d825554f10",
+        "android_client_info": {
+          "package_name": "com.mas.samplevideomeeting"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "118231109169-l41tlb3rppvaflq3q86di3i9qse0taco.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mas.samplevideomeeting",
+            "certificate_hash": "964b286dbb522e6b28bb3ae53592685b7f81d6a9"
+          }
+        },
+        {
+          "client_id": "118231109169-bj80jhf8c4p0d5tntpaoj6q7bor8c64b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAd57Xhjkv5tEDIo4HsyNjKaaTAp_Mo4RI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "118231109169-bj80jhf8c4p0d5tntpaoj6q7bor8c64b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
