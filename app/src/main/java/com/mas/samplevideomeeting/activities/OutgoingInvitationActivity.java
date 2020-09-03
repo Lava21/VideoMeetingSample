@@ -175,7 +175,7 @@ public class OutgoingInvitationActivity extends AppCompatActivity {
             if (type != null) {
                 if (type.equals(Constants.REMOTE_MSG_INVITATION_ACCEPTED)) {
                     try {
-                        URL serverURL = new URL("http://meet.jit.si");
+                        URL serverURL = new URL("https://meet.jit.si");
                         JitsiMeetConferenceOptions conferenceOptions =
                                 new JitsiMeetConferenceOptions.Builder()
                                 .setServerURL(serverURL)
