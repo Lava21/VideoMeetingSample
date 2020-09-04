@@ -3,6 +3,7 @@ package com.mas.samplevideomeeting.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.gson.Gson;
 import com.mas.samplevideomeeting.R;
 import com.mas.samplevideomeeting.adapter.UsersAdapter;
 import com.mas.samplevideomeeting.listeners.UsersListener;
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements UsersListener {
     private UsersAdapter usersAdapter;
     private TextView tvErrorMessage;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private ImageView ivConference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements UsersListener {
         setContentView(R.layout.activity_main);
 
         preferenceManager = new PreferenceManager(getApplicationContext());
+
+        ivConference = findViewById(R.id.ivConference);
 
         TextView tvTitle = findViewById(R.id.tvTitle);
         tvTitle.setText(String.format(
@@ -161,6 +166,22 @@ public class MainActivity extends AppCompatActivity implements UsersListener {
             intent.putExtra("user", user);
             intent.putExtra("type", "audio");
             startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onMultipleUsersAction(Boolean isMultipleUsersSelected) {
+        if (isMultipleUsersSelected) {
+            ivConference.setVisibility(View.VISIBLE);
+            ivConference.setOnClickListener(v -> {
+                Intent intent = new Intent(getApplicationContext(), OutgoingInvitationActivity.class);
+                intent.putExtra("selectedUsers", new Gson().toJson(usersAdapter.getSelectedUsers()));
+                intent.putExtra("type", "video");
+                intent.putExtra("isMultiple", true);
+                startActivity(intent);
+            });
+        } else {
+            ivConference.setVisibility(View.GONE);
         }
     }
 }

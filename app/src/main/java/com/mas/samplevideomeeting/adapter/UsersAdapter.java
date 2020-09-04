@@ -7,22 +7,30 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mas.samplevideomeeting.listeners.UsersListener;
 import com.mas.samplevideomeeting.model.User;
 import com.mas.samplevideomeeting.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHolder>{
 
     private List<User> users;
     private UsersListener usersListener;
+    private List<User> selectedUsers;
 
     public UsersAdapter(List<User> users, UsersListener usersListener) {
         this.users = users;
         this.usersListener = usersListener;
+        selectedUsers = new ArrayList<>();
+    }
+
+    public List<User> getSelectedUsers() {
+        return selectedUsers;
     }
 
     @NonNull
@@ -51,6 +59,8 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
 
         TextView tvFirstChar, tvUsername, tvEmail;
         ImageView ivAudioMeeting, ivVideoMeeting;
+        ConstraintLayout userContainer;
+        ImageView ivSelected;
 
         UserViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -60,6 +70,8 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
             tvEmail = itemView.findViewById(R.id.tvEmail);
             ivAudioMeeting = itemView.findViewById(R.id.ivAudioMeeting);
             ivVideoMeeting = itemView.findViewById(R.id.ivVideoMeeting);
+            userContainer = itemView.findViewById(R.id.userContainer);
+            ivSelected = itemView.findViewById(R.id.ivSelected);
         }
 
         void setUserData(User user) {
@@ -67,17 +79,36 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
             tvUsername.setText(String.format("%s %s", user.firstName, user.lastName));
             tvEmail.setText(user.email);
 
-            ivAudioMeeting.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    usersListener.initiateAudioMeeting(user);
+            ivAudioMeeting.setOnClickListener(v -> usersListener.initiateAudioMeeting(user));
+            ivVideoMeeting.setOnClickListener(v -> usersListener.initiateVideoMeeting(user));
+
+            userContainer.setOnLongClickListener(v -> {
+                if (ivSelected.getVisibility() != View.VISIBLE){
+                    selectedUsers.add(user);
+                    ivSelected.setVisibility(View.VISIBLE);
+                    ivVideoMeeting.setVisibility(View.GONE);
+                    ivAudioMeeting.setVisibility(View.GONE);
+                    usersListener.onMultipleUsersAction(true);
                 }
+                return true;
             });
 
-            ivVideoMeeting.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    usersListener.initiateVideoMeeting(user);
+            userContainer.setOnClickListener(v -> {
+                if (ivSelected.getVisibility() == View.VISIBLE) {
+                    selectedUsers.remove(user);
+                    ivSelected.setVisibility(View.GONE);
+                    ivVideoMeeting.setVisibility(View.VISIBLE);
+                    ivAudioMeeting.setVisibility(View.VISIBLE);
+                    if (selectedUsers.size() == 0) {
+                        usersListener.onMultipleUsersAction(false);
+                    }
+                } else {
+                    if (selectedUsers.size() > 0) {
+                        selectedUsers.add(user);
+                        ivSelected.setVisibility(View.VISIBLE);
+                        ivVideoMeeting.setVisibility(View.GONE);
+                        ivAudioMeeting.setVisibility(View.GONE);
+                    }
                 }
             });
         }
